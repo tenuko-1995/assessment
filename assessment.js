@@ -15,12 +15,19 @@ function removeAllchildren(element){
   }
 }
 
+// 入力された名前を取得する
 assessmentButton.onclick = () => {
   const userName = userNameInput.value;
 if(userName.length === 0){
   // 名前が入力されなかった場合は処理を終了する
   return;
 }
+// Enterキーが押されても診断できるようにする
+userNameInput.onkeydown = event => {
+  if(event.key === 'Enter'){
+    assessmentButton();
+  }
+};
 
   // 診断結果表示エリアの作成
 removeAllchildren(resultDivided);
@@ -33,7 +40,7 @@ const result = assessment(userName);
 paragraph.innerText = result;
 resultDivided.appendChild(paragraph);
 
-  // TODO ツイートエリアの作成
+  // ツイートエリアの作成
   removeAllchildren(tweetDivided);
   const anchor = document.createElement('a');
   const hrefValue = 
